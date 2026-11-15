@@ -158,6 +158,12 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('uv.lock') }}-${{ hashFiles('pyproject.toml') }}
+
       - name: Install system dependencies (Linux)
         if: matrix.os == 'linux'
         run: |
